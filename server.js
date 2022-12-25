@@ -1,12 +1,13 @@
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
-const io = require('socket.io')(server);
-const cors = require('cors');  // import the cors package
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:3001",
+    methods: ["GET", "POST"]
+  }
+});
 const { spawn } = require('child_process');
-
-// enable CORS for all routes
-app.use(cors());
 
 // serve the static files from the client directory
 app.use(express.static('client'));

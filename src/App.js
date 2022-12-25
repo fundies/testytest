@@ -13,7 +13,12 @@ const App = () => {
 
   // listen for 'command-output' events and append the output to the state
   socket.on('command-output', (data) => {
-    setOutput((prevOutput) => prevOutput + data);
+    // create a new TextDecoder instance
+    const decoder = new TextDecoder();
+    // convert the data to a string
+    const output = decoder.decode(data);
+    // update the output in the user interface
+    setOutput((prevOutput) => prevOutput + output);
   });
 
   // listen for 'command-error' events and update the error state
